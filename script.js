@@ -9,7 +9,13 @@ async function fetchFile(url) {
   if (url === "") {
     alert("enter URL");
   } else {
-    await fetch(url)
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+    await fetch(`${proxyUrl}${url}`, {
+      mode: "cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
       .then((res) => res.blob())
       .then((file) => {
         let tempUrl = URL.createObjectURL(file);
